@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MS130_3rd_Assignment_23105421</title>
+<title>MS5130_3rd_Assignment_23105421</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="23105421_quarto_files/libs/clipboard/clipboard.min.js"></script>
@@ -81,7 +100,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="23105421_quarto_files/libs/leaflet-binding-2.2.2/leaflet.js"></script>
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -92,23 +110,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#part-a" id="toc-part-a" class="nav-link active" data-scroll-target="#part-a">Part A</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part A</a>
   <ul class="collapse">
-  <li><a href="#reading-files" id="toc-reading-files" class="nav-link" data-scroll-target="#reading-files">Reading files</a></li>
+  <li><a href="#importing-files" id="toc-importing-files" class="nav-link" data-scroll-target="#importing-files">Importing files</a></li>
   <li><a href="#preprosseing-dataset" id="toc-preprosseing-dataset" class="nav-link" data-scroll-target="#preprosseing-dataset">Preprosseing dataset</a></li>
   <li><a href="#joining-datasets" id="toc-joining-datasets" class="nav-link" data-scroll-target="#joining-datasets">Joining Datasets</a></li>
-  <li><a href="#quantitative-analysis" id="toc-quantitative-analysis" class="nav-link" data-scroll-target="#quantitative-analysis">Quantitative Analysis</a></li>
-  <li><a href="#quantitative-analysis-1" id="toc-quantitative-analysis-1" class="nav-link" data-scroll-target="#quantitative-analysis-1">Quantitative Analysis</a></li>
+  <li><a href="#quantitative-analysis" id="toc-quantitative-analysis" class="nav-link" data-scroll-target="#quantitative-analysis">Quantitative Analysis</a>
+  <ul class="collapse">
+  <li><a href="#glm-model" id="toc-glm-model" class="nav-link" data-scroll-target="#glm-model">GLM model</a></li>
+  <li><a href="#gam-model" id="toc-gam-model" class="nav-link" data-scroll-target="#gam-model">GAM model</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part B</a>
   <ul class="collapse">
   <li><a href="#mermaid-design" id="toc-mermaid-design" class="nav-link" data-scroll-target="#mermaid-design">Mermaid design</a></li>
   <li><a href="#leaflet-analysis" id="toc-leaflet-analysis" class="nav-link" data-scroll-target="#leaflet-analysis">Leaflet Analysis</a>
   <ul class="collapse">
+  <li><a href="#adding-latitude-and-longitude" id="toc-adding-latitude-and-longitude" class="nav-link" data-scroll-target="#adding-latitude-and-longitude">Adding Latitude and Longitude</a></li>
   <li><a href="#geographical-analysis" id="toc-geographical-analysis" class="nav-link" data-scroll-target="#geographical-analysis">Geographical Analysis</a></li>
   </ul></li>
   <li><a href="#interactive-plot" id="toc-interactive-plot" class="nav-link" data-scroll-target="#interactive-plot">Interactive plot</a></li>
   </ul></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part C</a>
+  <ul class="collapse">
+  <li><a href="#bar-plot-population-of-top-5-countries" id="toc-bar-plot-population-of-top-5-countries" class="nav-link" data-scroll-target="#bar-plot-population-of-top-5-countries">Bar Plot-Population of Top 5 Countries</a></li>
+  <li><a href="#bar-plot-life-expectancy-of-top-5-populated-countries" id="toc-bar-plot-life-expectancy-of-top-5-populated-countries" class="nav-link" data-scroll-target="#bar-plot-life-expectancy-of-top-5-populated-countries">Bar Plot-Life Expectancy of Top 5 populated Countries</a></li>
+  <li><a href="#scattered-plot-fertility-rate-vs.-life-expectancy-for-selected-countries" id="toc-scattered-plot-fertility-rate-vs.-life-expectancy-for-selected-countries" class="nav-link" data-scroll-target="#scattered-plot-fertility-rate-vs.-life-expectancy-for-selected-countries">Scattered Plot-Fertility Rate vs.&nbsp;Life Expectancy for Selected countries</a></li>
+  <li><a href="#box-plots" id="toc-box-plots" class="nav-link" data-scroll-target="#box-plots">Box plots</a></li>
+  </ul></li>
+  <li><a href="#part-d-notes" id="toc-part-d-notes" class="nav-link" data-scroll-target="#part-d-notes">Part D-Notes</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -117,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MS130_3rd_Assignment_23105421</h1>
+<h1 class="title">MS5130_3rd_Assignment_23105421</h1>
 </div>
 
 
@@ -138,31 +169,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Author: Anup Kamath</figcaption>
 </figure>
 </div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<div style="text-align: justify;">
+<p>Greetings, this document has been crafted to satisfy the criteria of the MS5130 course, Applied Analytics in Business and Society. It encompasses a range of analyses including quantitative analysis, visualization utilizing the leaflet package, interactive graphs, and fundamental visualizations.</p>
+</div>
+</section>
 <section id="part-a" class="level1">
 <h1>Part A</h1>
-<section id="reading-files" class="level2">
-<h2 class="anchored" data-anchor-id="reading-files">Reading files</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<div style="text-align: justify;">
+<p>In Part I, I will showcase some of the basic enhancements (BEs) I have implemented. These enhancements primarily involve utilizing Markdown, Quarto, dataset reading, preprocessing, merging, and conducting quantitative analysis</p>
+</div>
+<section id="importing-files" class="level2">
+<h2 class="anchored" data-anchor-id="importing-files">Importing files</h2>
+<div style="text-align: justify;">
+<p>The initial steps involve establishing the directory and importing necessary files. The data-sets essential for the analysis were sourced from <span class="citation" data-cites="joshuaswords_awesome-eda-2021-happiness-population">Words (<a href="#ref-joshuaswords_awesome-eda-2021-happiness-population" role="doc-biblioref">2021</a>)</span> . The data-set contains information on various parameters such as life expectancy, fertility rate, corruption, etc., pertaining to different countries.This will full-fill our BE2- Use multiple data-sets task.</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"the current directory is"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "the current directory is"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "C:/Users/ANUP KAMATH/Documents/GitHub/R-Assignment"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/ANUP KAMATH/Desktop"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Lets set the directory as per our requirement"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "C:/Users/ANUP KAMATH/Desktop"</code></pre>
+<pre><code>[1] "Lets set the directory as per our requirement"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>file1<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">"C:/Users/ANUP KAMATH/Desktop/children-born-per-woman.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(file1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/ANUP KAMATH/Documents/GitHub/R-Assignment"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The new directory is"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The new directory is"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C:/Users/ANUP KAMATH/Documents/GitHub/R-Assignment"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#importing 1st file</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>file1<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">"C:/Users/ANUP KAMATH/Desktop/children-born-per-woman.csv"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The first few rows of 1st file are"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The first few rows of 1st file are"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(file1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Entity Code Year Fertility.rate..Gapminder..v12..2017.
@@ -175,8 +246,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>file2<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">"C:/Users/ANUP KAMATH/Desktop/world-happiness-report.csv"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(file2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#importing 2nd file</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>file2<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">"C:/Users/ANUP KAMATH/Desktop/world-happiness-report.csv"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The first few rows of 2nd file are"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The first few rows of 2nd file are"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(file2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Country.name year Life.Ladder Log.GDP.per.capita Social.support
@@ -203,8 +282,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>file3<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">"C:/Users/ANUP KAMATH/Desktop/population_by_country_2020.csv"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(file3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#importing 3rd file</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>file3<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">"C:/Users/ANUP KAMATH/Desktop/population_by_country_2020.csv"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The first few rows of 3rd file are"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The first few rows of 3rd file are"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(file3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Country..or.dependency. Population..2020. Yearly.Change Net.Change
@@ -233,29 +320,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="preprosseing-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="preprosseing-dataset">Preprosseing dataset</h2>
-<p>You can add options to executable code like this</p>
+<div style="text-align: justify;">
+<p>Now, let’s preprocess the data to facilitate easy joining. We have selected only the columns necessary for our analysis, and the rest have been dropped. We have only retained data with respect to year 2020. The names of the columns has been changed.</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#file 1 changes</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>subset_a_2020 <span class="ot">&lt;-</span> file1[file1<span class="sc">$</span>Year <span class="sc">==</span> <span class="dv">2020</span>, ]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_a_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#file 1 changes</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>subset_a_2020 <span class="ot">&lt;-</span> file1[file1<span class="sc">$</span>Year <span class="sc">==</span> <span class="dv">2020</span>, ]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#head(subset_a_2020)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>subset_a_2020 <span class="ot">&lt;-</span> subset_a_2020[, <span class="fu">c</span>(<span class="st">"Entity"</span>, <span class="st">"Code"</span>, </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Fertility.rate..Gapminder..v12..2017."</span>)]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(subset_a_2020) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"code"</span>, <span class="st">"fertility_rate"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The new modified file 1 data-setlooks like this"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 Entity Code Year Fertility.rate..Gapminder..v12..2017.
-71          Afghanistan  AFG 2020                                  4.04
-162             Albania  ALB 2020                                  1.70
-235             Algeria  DZA 2020                                  2.54
-308              Angola  AGO 2020                                  5.41
-381 Antigua and Barbuda  ATG 2020                                  2.01
-535           Argentina  ARG 2020                                  2.23</code></pre>
+<pre><code>[1] "The new modified file 1 data-setlooks like this"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>subset_a_2020 <span class="ot">&lt;-</span> subset_a_2020[, <span class="fu">c</span>(<span class="st">"Entity"</span>, <span class="st">"Code"</span>, </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Fertility.rate..Gapminder..v12..2017."</span>)]</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(subset_a_2020) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"code"</span>, <span class="st">"fertility_rate"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_a_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_a_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                country code fertility_rate
@@ -268,44 +353,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#file 2 changes</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>subset_b_2020 <span class="ot">&lt;-</span> file2[file2<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2020</span>, ]</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the subset</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_b_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#file 2 changes</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>subset_b_2020 <span class="ot">&lt;-</span> file2[file2<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2020</span>, ]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the subset</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#head(subset_b_2020)</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>subset_b_2020 <span class="ot">&lt;-</span> subset_b_2020[, <span class="fu">c</span>(<span class="st">"Country.name"</span>, <span class="st">"Healthy.life.expectancy.at.birth"</span>, </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Freedom.to.make.life.choices"</span>, <span class="st">"Generosity"</span>, </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Perceptions.of.corruption"</span>)]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(subset_b_2020) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"life_expectancy"</span>, <span class="st">"freedom"</span>,<span class="st">"generosity"</span>,<span class="st">"corruption"</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># View the modified subset</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The modified file 2 data-setlooks like this"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>    Country.name year Life.Ladder Log.GDP.per.capita Social.support
-25       Albania 2020       5.365              9.497          0.710
-52     Argentina 2020       5.901              9.850          0.897
-80     Australia 2020       7.137             10.760          0.937
-93       Austria 2020       7.213             10.851          0.925
-118      Bahrain 2020       6.173             10.620          0.848
-133   Bangladesh 2020       5.280              8.472          0.739
-    Healthy.life.expectancy.at.birth Freedom.to.make.life.choices Generosity
-25                              69.3                        0.754      0.007
-52                              69.2                        0.823     -0.122
-80                              74.2                        0.905      0.210
-93                              73.6                        0.912      0.011
-118                             69.7                        0.945      0.132
-133                             65.3                        0.777     -0.009
-    Perceptions.of.corruption Positive.affect Negative.affect
-25                      0.891           0.679           0.265
-52                      0.816           0.764           0.342
-80                      0.491           0.769           0.205
-93                      0.464           0.769           0.206
-118                        NA           0.790           0.297
-133                     0.742           0.582           0.332</code></pre>
+<pre><code>[1] "The modified file 2 data-setlooks like this"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>subset_b_2020 <span class="ot">&lt;-</span> subset_b_2020[, <span class="fu">c</span>(<span class="st">"Country.name"</span>, <span class="st">"Healthy.life.expectancy.at.birth"</span>, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Freedom.to.make.life.choices"</span>, <span class="st">"Generosity"</span>, </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Perceptions.of.corruption"</span>)]</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(subset_b_2020) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"life_expectancy"</span>, <span class="st">"freedom"</span>,<span class="st">"generosity"</span>,<span class="st">"corruption"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># View the modified subset</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_b_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_b_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       country life_expectancy freedom generosity corruption
@@ -318,51 +384,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#file 3 changes</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(file3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#file 3 changes</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#head(file3)</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#colnames(file3)</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>subset_c_2020 <span class="ot">&lt;-</span> file3[, <span class="fu">c</span>(<span class="st">"Country..or.dependency."</span>, <span class="st">"Population..2020."</span>, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Density..P.Km.."</span>)]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(subset_c_2020)<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"population"</span>, <span class="st">"density_pkm"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The modified file 3 data-setlooks like this"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Country..or.dependency. Population..2020. Yearly.Change Net.Change
-1                   China        1440297825        0.39 %    5540090
-2                   India        1382345085        0.99 %   13586631
-3           United States         331341050        0.59 %    1937734
-4               Indonesia         274021604        1.07 %    2898047
-5                Pakistan         221612785        2.00 %    4327022
-6                  Brazil         212821986        0.72 %    1509890
-  Density..P.Km.. Land.Area..Km.. Migrants..net. Fert..Rate Med..Age
-1             153         9388211        -348399        1.7       38
-2             464         2973190        -532687        2.2       28
-3              36         9147420         954806        1.8       38
-4             151         1811570         -98955        2.3       30
-5             287          770880        -233379        3.6       23
-6              25         8358140          21200        1.7       33
-  Urban.Pop.. World.Share
-1        61 %     18.47 %
-2        35 %     17.70 %
-3        83 %      4.25 %
-4        56 %      3.51 %
-5        35 %      2.83 %
-6        88 %      2.73 %</code></pre>
+<pre><code>[1] "The modified file 3 data-setlooks like this"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(file3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "Country..or.dependency." "Population..2020."      
- [3] "Yearly.Change"           "Net.Change"             
- [5] "Density..P.Km.."         "Land.Area..Km.."        
- [7] "Migrants..net."          "Fert..Rate"             
- [9] "Med..Age"                "Urban.Pop.."            
-[11] "World.Share"            </code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>subset_c_2020 <span class="ot">&lt;-</span> file3[, <span class="fu">c</span>(<span class="st">"Country..or.dependency."</span>, <span class="st">"Population..2020."</span>, </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Density..P.Km.."</span>)]</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(subset_c_2020)<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"population"</span>, <span class="st">"density_pkm"</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_c_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(subset_c_2020)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        country population density_pkm
@@ -377,26 +413,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="joining-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="joining-datasets">Joining Datasets</h2>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+<div style="text-align: justify;">
+<p>It’s time to join the 3 data-sets into 1. I have used dplyr libraries inner join to join them. As R is case sensitive I had to change all country names to lower caps to succed in this task.This will full-fill our BE3- Combine data-sets together task.</p>
+</div>
+<p>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#joining tables</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert country column to lowercase in all dataframes</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>subset_a_2020 <span class="ot">&lt;-</span> subset_a_2020 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">tolower</span>(country))</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>subset_b_2020 <span class="ot">&lt;-</span> subset_b_2020 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">tolower</span>(country))</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>subset_c_2020 <span class="ot">&lt;-</span> subset_c_2020 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">tolower</span>(country))</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#join data</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>country_data <span class="ot">&lt;-</span> subset_b_2020 <span class="sc">%&gt;%</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(subset_a_2020, <span class="at">by =</span> <span class="st">"country"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(subset_c_2020, <span class="at">by =</span> <span class="st">"country"</span>)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co">#show new dataset</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(country_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#joining tables</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert country column to lowercase in all dataframes</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>subset_a_2020 <span class="ot">&lt;-</span> subset_a_2020 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">tolower</span>(country))</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>subset_b_2020 <span class="ot">&lt;-</span> subset_b_2020 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">tolower</span>(country))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>subset_c_2020 <span class="ot">&lt;-</span> subset_c_2020 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">tolower</span>(country))</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#join data</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>country_data <span class="ot">&lt;-</span> subset_b_2020 <span class="sc">%&gt;%</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(subset_a_2020, <span class="at">by =</span> <span class="st">"country"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(subset_c_2020, <span class="at">by =</span> <span class="st">"country"</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co">#show new dataset</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The new data-set looks like this"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The new data-set looks like this"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(country_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     country life_expectancy freedom generosity corruption code fertility_rate
@@ -418,54 +464,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="quantitative-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="quantitative-analysis">Quantitative Analysis</h2>
-<p>###GLM model</p>
+<div style="text-align: justify;">
+<p>Due to the inadequacy of my dataset in producing satisfactory models, I opted to convert my target variable, corruption, into a factor <span class="citation" data-cites="stackoverflow_convert-data-frame-column-format">Overflow (<a href="#ref-stackoverflow_convert-data-frame-column-format" role="doc-biblioref">2012</a>)</span> . With this new column, I proceeded to run GLM and GAM models. As my datasets do not allow for qualitative models like text mining, I focused on satisfying the deliverable (BE4) by incorporating a synergy of quantitative and qualitative analyses through GLM and GAM models.</p>
+</div>
+<section id="glm-model" class="level3">
+<h3 class="anchored" data-anchor-id="glm-model">GLM model</h3>
+<div style="text-align: justify;">
+<p>A Generalized Linear Model (GLM) is a statistical framework that allows for the analysis of data with diverse response distributions.Here I have used the corruption_factor as a tagert variable and freedom column as the independent variable.</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#quantitative analysis- glm model</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting corruption into factor inorder to run glm model</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>country_data <span class="ot">&lt;-</span> country_data <span class="sc">%&gt;%</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">corruption_factor =</span> <span class="fu">ifelse</span>(corruption <span class="sc">&gt;</span> <span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'corruption_factor' to a factor variable</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>corruption_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(country_data<span class="sc">$</span>corruption_factor)</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(country_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>     country life_expectancy freedom generosity corruption code fertility_rate
-1    albania            69.3   0.754      0.007      0.891  ALB           1.70
-2  argentina            69.2   0.823     -0.122      0.816  ARG           2.23
-3  australia            74.2   0.905      0.210      0.491  AUS           1.81
-4    austria            73.6   0.912      0.011      0.464  AUT           1.54
-5    bahrain            69.7   0.945      0.132         NA  BHR           1.94
-6 bangladesh            65.3   0.777     -0.009      0.742  BGD           2.00
-  population density_pkm corruption_factor
-1    2877239         105                 1
-2   45267449          17                 1
-3   25550683           3                 0
-4    9015361         109                 0
-5    1711057        2239              &lt;NA&gt;
-6  164972348        1265                 1</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># running glm model</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and testing sets</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>sample_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(country_data), <span class="dv">70</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> country_data[sample_indices, ]</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> country_data[<span class="sc">-</span>sample_indices, ]</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the logistic regression model</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>glm_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(corruption_factor <span class="sc">~</span> freedom, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>), <span class="at">data =</span> train_data)</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#quantitative analysis- glm model</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting corruption into factor inorder to run glm model</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>country_data <span class="ot">&lt;-</span> country_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">corruption_factor =</span> <span class="fu">ifelse</span>(corruption <span class="sc">&gt;</span> <span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'corruption_factor' to a factor variable</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>corruption_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(country_data<span class="sc">$</span>corruption_factor)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># running glm model</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and testing sets</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>sample_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(country_data), <span class="dv">70</span>)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> country_data[sample_indices, ]</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> country_data[<span class="sc">-</span>sample_indices, ]</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the logistic regression model</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>glm_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(corruption_factor <span class="sc">~</span> freedom, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>), <span class="at">data =</span> train_data)</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -489,8 +522,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the model</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the model</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -505,22 +538,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<div style="text-align: justify;">
+<p>The Fisher Scoring algorithm converged in 4 iterations. The obtained p-value of 0.176 suggests insignificance, indicating no significant relationship between corruption and freedom. The null deviance (18.550) and residual deviance (16.593) represent the deviation of the fitted model, with lower values indicating better model fit.</p>
+</div>
 </section>
-<section id="quantitative-analysis-1" class="level2">
-<h2 class="anchored" data-anchor-id="quantitative-analysis-1">Quantitative Analysis</h2>
-<p>###GAM model</p>
+<section id="gam-model" class="level3">
+<h3 class="anchored" data-anchor-id="gam-model">GAM model</h3>
+<div style="text-align: justify;">
+<p>A Generalized Additive Model (GAM) is a flexible extension of the Generalized Linear Model (GLM) that incorporates non-linear relationships between predictors and the response variable. The GAM model was built with corruption as the target variable, freedom and generosity were the independent variable.</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#gam model</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gam")</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a GAM model</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>gam_model <span class="ot">&lt;-</span> <span class="fu">gam</span>(corruption <span class="sc">~</span> <span class="fu">s</span>(freedom ) <span class="sc">+</span> <span class="fu">s</span>(generosity), <span class="at">data =</span> country_data)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gam_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#gam model</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gam")</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a GAM model</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>gam_model <span class="ot">&lt;-</span> <span class="fu">gam</span>(corruption <span class="sc">~</span> <span class="fu">s</span>(freedom ) <span class="sc">+</span> <span class="fu">s</span>(generosity), <span class="at">data =</span> country_data)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gam_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -548,7 +586,7 @@ GCV = 0.030496  Scale est. = 0.028842  n = 78</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gam_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gam_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
@@ -557,18 +595,28 @@ GCV = 0.030496  Scale est. = 0.028842  n = 78</code></pre>
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<div style="text-align: justify;">
+<p>The adjusted R-squared is 0.31, indicating that 31% of the variation in corruption is explained by the model. The deviance explained is 33.9%. The smooth term for freedom has an effective degrees of freedom (edf) of 2.23 and a highly significant F-statistic (p &lt; 2.96e-06), suggesting a non-linear relationship with corruption. However, the smooth term for generosity is not significant (p = 0.877), implying a linear relationship.</p>
+</div>
+</section>
 </section>
 </section>
 <section id="part-b" class="level1">
 <h1>Part B</h1>
+<div style="text-align: justify;">
+<p>In this sections I will be performing tasks for superior enhancements (SEs)</p>
+</div>
 <section id="mermaid-design" class="level2">
 <h2 class="anchored" data-anchor-id="mermaid-design">Mermaid design</h2>
+<div style="text-align: justify;">
+<p>The mermaid tool is used to describe the flow of data and also varibles used to do varies analysis and visualization.This task will fulfill the (SE1) Depict your data streams using Mermaid.</p>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <div>
 <pre class="mermaid mermaid-js">graph LR
-    A[children-born-per-woman]-- import data --&gt; D[subset_a_2020]
+     A[children-born-per-woman]-- import data --&gt; D[subset_a_2020]
     B[world-happiness-report]-- import data --&gt; E[subset_b_2020]
     C[population_by_country_2020]-- import data  --&gt; F[subset_c_2020]
     D[subset_a_2020]-- Preprocess data --&gt; M((country_data))
@@ -580,6 +628,12 @@ GCV = 0.030496  Scale est. = 0.028842  n = 78</code></pre>
     M((country_data))-- GAM model--&gt;I[GAM Model]
    I[GAM Model]-- variables--&gt;J[corruption,generosity &amp; Freedom]
 
+    M((country_data))-- leaflet--&gt;K[ Geographic map]--variables--&gt;WY[Population,Corruption]
+    B[world-happiness-report]-- interactive graph --&gt; L[ Scattered plot]
+    M((country_data))--&gt;N[Bar plot]--variables--&gt;W[Population]
+    M((country_data))--&gt;Y[Bar plot]--variables--&gt;S[Life expectancy]
+    M((country_data))--&gt;O[Scattere Plot]--variables--&gt;X[Fertility Rate vs. Life Expectancy]
+    M((country_data))--&gt;U[Box Plot]--variables--&gt;R[corruption,generosity,fertility rate,life expectancy]
 </pre>
 </div>
 </div>
@@ -588,139 +642,115 @@ GCV = 0.030496  Scale est. = 0.028842  n = 78</code></pre>
 </section>
 <section id="leaflet-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="leaflet-analysis">Leaflet Analysis</h2>
-<p>###Adding Latitude and Longitude</p>
+<div style="text-align: justify;">
+<p>Using Leaflet library we can map various parameters on the world/area maps.This task will fulfill the (SE3) Use of geographical data analysis using Leaflet.</p>
+</div>
+<section id="adding-latitude-and-longitude" class="level3">
+<h3 class="anchored" data-anchor-id="adding-latitude-and-longitude">Adding Latitude and Longitude</h3>
+<div style="text-align: justify;">
+<p>While doing the analysis I was not able to map parameters on the world map as latitudes and logitude werentpresent in my dataset. I used Generative AI to add these columns to my dataset <span class="citation" data-cites="openai_chatgpt">OpenAI (<a href="#ref-openai_chatgpt" role="doc-biblioref">2024</a>)</span></p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install required packages</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("readr")</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("dplyr")</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!require("tm")) install.packages("tm")</span></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!require("wordcloud")) install.packages("wordcloud")</span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!require("RColorBrewer")) install.packages("RColorBrewer")</span></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"leaflet"</span>)) <span class="fu">install.packages</span>(<span class="st">"leaflet"</span>)</span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"countrycode"</span>)) <span class="fu">install.packages</span>(<span class="st">"countrycode"</span>)</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(countrycode)</span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("plotly")</span></span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(country_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>     country life_expectancy freedom generosity corruption code fertility_rate
-1    albania            69.3   0.754      0.007      0.891  ALB           1.70
-2  argentina            69.2   0.823     -0.122      0.816  ARG           2.23
-3  australia            74.2   0.905      0.210      0.491  AUS           1.81
-4    austria            73.6   0.912      0.011      0.464  AUT           1.54
-5    bahrain            69.7   0.945      0.132         NA  BHR           1.94
-6 bangladesh            65.3   0.777     -0.009      0.742  BGD           2.00
-  population density_pkm corruption_factor
-1    2877239         105                 1
-2   45267449          17                 1
-3   25550683           3                 0
-4    9015361         109                 0
-5    1711057        2239              &lt;NA&gt;
-6  164972348        1265                 1</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>world_map <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert country names in anuata to lowercase</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">tolower</span>(country_data<span class="sc">$</span>country)</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert region names in world_map (which represents countries here) to lowercase</span></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>world_map<span class="sc">$</span>region <span class="ot">&lt;-</span> <span class="fu">tolower</span>(world_map<span class="sc">$</span>region)</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co"># unique list of countries with their mean latitude and longitude</span></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>country_coords <span class="ot">&lt;-</span> world_map <span class="sc">%&gt;%</span></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">lat =</span> <span class="fu">mean</span>(lat), <span class="at">lon =</span> <span class="fu">mean</span>(long), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the coordinates</span></span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>country_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(country_data, country_coords, <span class="at">by.x =</span> <span class="st">"country"</span>, <span class="at">by.y =</span> <span class="st">"region"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>non_matching <span class="ot">&lt;-</span> country_data[<span class="fu">is.na</span>(country_data<span class="sc">$</span>lat), <span class="st">"country"</span>]</span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(non_matching)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install required packages</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("readr")</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("dplyr")</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!require("tm")) install.packages("tm")</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!require("wordcloud")) install.packages("wordcloud")</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!require("RColorBrewer")) install.packages("RColorBrewer")</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"leaflet"</span>)) <span class="fu">install.packages</span>(<span class="st">"leaflet"</span>)</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"countrycode"</span>)) <span class="fu">install.packages</span>(<span class="st">"countrycode"</span>)</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(countrycode)</span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("plotly")</span></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a><span class="co">#head(country_data)</span></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>world_map <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>)</span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert country names in anuata to lowercase</span></span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">tolower</span>(country_data<span class="sc">$</span>country)</span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert region names in world_map (which represents countries here) to lowercase</span></span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>world_map<span class="sc">$</span>region <span class="ot">&lt;-</span> <span class="fu">tolower</span>(world_map<span class="sc">$</span>region)</span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a><span class="co"># unique list of countries with their mean latitude and longitude</span></span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a>country_coords <span class="ot">&lt;-</span> world_map <span class="sc">%&gt;%</span></span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">lat =</span> <span class="fu">mean</span>(lat), <span class="at">lon =</span> <span class="fu">mean</span>(long), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the coordinates</span></span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a>country_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(country_data, country_coords, <span class="at">by.x =</span> <span class="st">"country"</span>, <span class="at">by.y =</span> <span class="st">"region"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a>non_matching <span class="ot">&lt;-</span> country_data[<span class="fu">is.na</span>(country_data<span class="sc">$</span>lat), <span class="st">"country"</span>]</span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(non_matching)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "united kingdom" "united states" </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#US and UK latitude and logitude missing</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#adding lat &amp; long for US</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lat <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united states"</span>, <span class="fl">37.0902</span>, country_data<span class="sc">$</span>lat)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lon <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united states"</span>, <span class="sc">-</span><span class="fl">95.7129</span>, country_data<span class="sc">$</span>lon)</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># adding lat &amp; long for Uk</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lat <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united kingdom"</span>, <span class="fl">55.3781</span>, country_data<span class="sc">$</span>lat)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lon <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united kingdom"</span>, <span class="sc">-</span><span class="fl">3.4360</span>, country_data<span class="sc">$</span>lon)</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(country_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#US and UK latitude and logitude missing</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#adding lat &amp; long for US</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lat <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united states"</span>, <span class="fl">37.0902</span>, country_data<span class="sc">$</span>lat)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lon <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united states"</span>, <span class="sc">-</span><span class="fl">95.7129</span>, country_data<span class="sc">$</span>lon)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co"># adding lat &amp; long for Uk</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lat <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united kingdom"</span>, <span class="fl">55.3781</span>, country_data<span class="sc">$</span>lat)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>country_data<span class="sc">$</span>lon <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(country_data<span class="sc">$</span>country <span class="sc">==</span> <span class="st">"united kingdom"</span>, <span class="sc">-</span><span class="fl">3.4360</span>, country_data<span class="sc">$</span>lon)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="co">#tail(country_data)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>          country life_expectancy freedom generosity corruption code
-84 united kingdom            72.7   0.885      0.203      0.490  GBR
-85  united states            68.1   0.850      0.034      0.678  USA
-86        uruguay            69.2   0.908     -0.084      0.491  URY
-87      venezuela            66.9   0.612         NA      0.811  VEN
-88         zambia            56.3   0.750      0.056      0.810  ZMB
-89       zimbabwe            56.8   0.643     -0.009      0.789  ZWE
-   fertility_rate population density_pkm corruption_factor        lat       lon
-84           1.87   67948282         281                 0  55.378100  -3.43600
-85           1.89  331341050          36                 1  37.090200 -95.71290
-86           1.95    3475842          20                 0 -32.297261 -56.01837
-87           2.23   28421581          32                 1   7.398184 -65.79782
-88           4.76   18468257          25                 1 -12.504296  28.81300
-89           3.47   14899771          38                 1 -19.147785  29.64059</code></pre>
 </div>
-</div>
+</section>
 <section id="geographical-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="geographical-analysis">Geographical Analysis</h3>
+<div style="text-align: justify;">
+<p>The Map visualisation using Leaflet library</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>world_map_leaflet <span class="ot">&lt;-</span> <span class="fu">leaflet</span>(<span class="at">data =</span> country_data) <span class="sc">%&gt;%</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="dv">0</span>, <span class="at">lat =</span> <span class="dv">30</span>, <span class="at">zoom =</span> <span class="dv">2</span>)  </span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>world_map_leaflet <span class="ot">&lt;-</span> world_map_leaflet <span class="sc">%&gt;%</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>lon,  </span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>lat,  </span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(<span class="st">"&lt;b&gt;Country:&lt;/b&gt; "</span>, country, <span class="st">"&lt;br&gt;"</span>,</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"&lt;b&gt;Population:&lt;/b&gt; "</span>, population, <span class="st">"&lt;br&gt;"</span>,</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"&lt;b&gt;Corruption:&lt;/b&gt; "</span>, corruption)  </span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the map</span></span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>world_map_leaflet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>world_map_leaflet <span class="ot">&lt;-</span> <span class="fu">leaflet</span>(<span class="at">data =</span> country_data) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="dv">0</span>, <span class="at">lat =</span> <span class="dv">30</span>, <span class="at">zoom =</span> <span class="dv">2</span>)  </span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>world_map_leaflet <span class="ot">&lt;-</span> world_map_leaflet <span class="sc">%&gt;%</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>lon,  </span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>lat,  </span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(<span class="st">"&lt;b&gt;Country:&lt;/b&gt; "</span>, country, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"&lt;b&gt;Population:&lt;/b&gt; "</span>, population, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"&lt;b&gt;Corruption:&lt;/b&gt; "</span>, corruption)  </span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the map</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>world_map_leaflet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-0bb2780fb795d1b48284" style="width:100%;height:464px;"></div>
@@ -731,341 +761,154 @@ GCV = 0.030496  Scale est. = 0.028842  n = 78</code></pre>
 </section>
 <section id="interactive-plot" class="level2">
 <h2 class="anchored" data-anchor-id="interactive-plot">Interactive plot</h2>
+<div style="text-align: justify;">
+<p>Interactive plot allows you move around in the final output file, like pop-up zoom in zoom out etc. This will full-fill the SE4- Use of interactive charts/graphs/plots task <span class="citation" data-cites="RGraphGallery">R Graph Gallery (<a href="#ref-RGraphGallery" role="doc-biblioref">Accessed 2024</a>)</span></p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://r-graph-gallery.com/interactive-charts.html</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#creating a subset </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>selected_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Afghanistan"</span>, <span class="st">"United States"</span>, <span class="st">"China"</span>, <span class="st">"Ireland"</span>, <span class="st">"India"</span>)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a subset where the "Country.name" is in the selected countries list</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>subset_file2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(file2, Country.name <span class="sc">%in%</span> selected_countries)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View the subset</span></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(subset_file2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>      Country.name year Life.Ladder Log.GDP.per.capita Social.support
-1      Afghanistan 2008       3.724              7.370          0.451
-2      Afghanistan 2009       4.402              7.540          0.552
-3      Afghanistan 2010       4.758              7.647          0.539
-4      Afghanistan 2011       3.832              7.620          0.521
-5      Afghanistan 2012       3.783              7.705          0.521
-6      Afghanistan 2013       3.572              7.725          0.484
-7      Afghanistan 2014       3.131              7.718          0.526
-8      Afghanistan 2015       3.983              7.702          0.529
-9      Afghanistan 2016       4.220              7.697          0.559
-10     Afghanistan 2017       2.662              7.697          0.491
-11     Afghanistan 2018       2.694              7.692          0.508
-12     Afghanistan 2019       2.375              7.697          0.420
-343          China 2006       4.560              8.696          0.747
-344          China 2007       4.863              8.824          0.811
-345          China 2008       4.846              8.911          0.748
-346          China 2009       4.454              8.996          0.798
-347          China 2010       4.653              9.092          0.768
-348          China 2011       5.037              9.179          0.787
-349          China 2012       5.095              9.249          0.788
-350          China 2013       5.241              9.319          0.778
-351          China 2014       5.196              9.386          0.820
-352          China 2015       5.304              9.449          0.794
-353          China 2016       5.325              9.510          0.742
-354          China 2017       5.099              9.571          0.772
-355          China 2018       5.131              9.632          0.788
-356          China 2019       5.144              9.688          0.822
-357          China 2020       5.771              9.702          0.808
-733          India 2006       5.348              8.145          0.707
-734          India 2007       5.027              8.204          0.569
-735          India 2008       5.146              8.220          0.684
-736          India 2009       4.522              8.281          0.653
-737          India 2010       4.989              8.349          0.605
-738          India 2011       4.635              8.387          0.553
-739          India 2012       4.720              8.428          0.511
-740          India 2013       4.428              8.478          0.553
-741          India 2014       4.424              8.538          0.621
-742          India 2015       4.342              8.604          0.610
-743          India 2016       4.179              8.673          0.614
-744          India 2017       4.046              8.730          0.607
-745          India 2018       3.818              8.779          0.638
-746          India 2019       3.249              8.818          0.561
-747          India 2020       4.225              8.703          0.617
-787        Ireland 2006       7.144             10.972          0.967
-788        Ireland 2008       7.568             10.929          0.983
-789        Ireland 2009       7.046             10.866          0.959
-790        Ireland 2010       7.257             10.879          0.973
-791        Ireland 2011       7.007             10.878          0.977
-792        Ireland 2012       6.965             10.876          0.962
-793        Ireland 2013       6.760             10.884          0.955
-794        Ireland 2014       7.018             10.959          0.968
-795        Ireland 2015       6.830             11.174          0.953
-796        Ireland 2016       7.041             11.199          0.958
-797        Ireland 2017       7.060             11.266          0.943
-798        Ireland 2018       6.962             11.332          0.938
-799        Ireland 2019       7.255             11.371          0.944
-800        Ireland 2020       7.035             11.323          0.960
-1837 United States 2006       7.182             10.924          0.965
-1838 United States 2007       7.513             10.933             NA
-1839 United States 2008       7.280             10.922          0.953
-1840 United States 2009       7.158             10.888          0.912
-1841 United States 2010       7.164             10.905          0.926
-1842 United States 2011       7.115             10.913          0.922
-1843 United States 2012       7.026             10.928          0.903
-1844 United States 2013       7.249             10.939          0.925
-1845 United States 2014       7.151             10.956          0.902
-1846 United States 2015       6.864             10.977          0.904
-1847 United States 2016       6.804             10.986          0.897
-1848 United States 2017       6.992             11.001          0.921
-1849 United States 2018       6.883             11.025          0.904
-1850 United States 2019       6.944             11.043          0.917
-1851 United States 2020       7.028             11.001          0.937
-     Healthy.life.expectancy.at.birth Freedom.to.make.life.choices Generosity
-1                               50.80                        0.718      0.168
-2                               51.20                        0.679      0.190
-3                               51.60                        0.600      0.121
-4                               51.92                        0.496      0.162
-5                               52.24                        0.531      0.236
-6                               52.56                        0.578      0.061
-7                               52.88                        0.509      0.104
-8                               53.20                        0.389      0.080
-9                               53.00                        0.523      0.042
-10                              52.80                        0.427     -0.121
-11                              52.60                        0.374     -0.094
-12                              52.40                        0.394     -0.108
-343                             66.88                           NA         NA
-344                             67.06                           NA     -0.176
-345                             67.24                        0.853     -0.092
-346                             67.42                        0.771     -0.160
-347                             67.60                        0.805     -0.133
-348                             67.76                        0.824     -0.186
-349                             67.92                        0.808     -0.185
-350                             68.08                        0.805     -0.158
-351                             68.24                           NA     -0.217
-352                             68.40                           NA     -0.244
-353                             68.70                           NA     -0.228
-354                             69.00                        0.878     -0.175
-355                             69.30                        0.895     -0.159
-356                             69.60                        0.927     -0.173
-357                             69.90                        0.891     -0.103
-733                             55.72                        0.774         NA
-734                             56.14                        0.729     -0.051
-735                             56.56                        0.756     -0.072
-736                             56.98                        0.679     -0.026
-737                             57.40                        0.783      0.058
-738                             57.70                        0.838     -0.038
-739                             58.00                        0.609      0.067
-740                             58.30                        0.740      0.084
-741                             58.60                        0.809     -0.026
-742                             58.90                        0.777     -0.005
-743                             59.30                        0.820      0.046
-744                             59.70                        0.886     -0.042
-745                             60.10                        0.890      0.085
-746                             60.50                        0.876      0.112
-747                             60.90                        0.906      0.075
-787                             70.14                        0.943      0.242
-788                             70.82                        0.894      0.322
-789                             71.16                        0.835      0.315
-790                             71.50                        0.856      0.348
-791                             71.60                        0.952      0.383
-792                             71.70                        0.902      0.302
-793                             71.80                        0.884      0.331
-794                             71.90                        0.922      0.264
-795                             72.00                        0.892      0.233
-796                             72.10                        0.875      0.174
-797                             72.20                        0.905      0.216
-798                             72.30                        0.861      0.144
-799                             72.40                        0.892      0.074
-800                             72.50                        0.882      0.014
-1837                            68.06                        0.911         NA
-1838                            68.22                        0.872      0.197
-1839                            68.38                        0.878      0.255
-1840                            68.54                        0.831      0.201
-1841                            68.70                        0.828      0.244
-1842                            68.68                        0.863      0.161
-1843                            68.66                        0.823      0.215
-1844                            68.64                        0.792      0.274
-1845                            68.62                        0.866      0.221
-1846                            68.60                        0.849      0.219
-1847                            68.50                        0.758      0.144
-1848                            68.40                        0.868      0.197
-1849                            68.30                        0.825      0.116
-1850                            68.20                        0.836      0.144
-1851                            68.10                        0.850      0.034
-     Perceptions.of.corruption Positive.affect Negative.affect
-1                        0.882           0.518           0.258
-2                        0.850           0.584           0.237
-3                        0.707           0.618           0.275
-4                        0.731           0.611           0.267
-5                        0.776           0.710           0.268
-6                        0.823           0.621           0.273
-7                        0.871           0.532           0.375
-8                        0.881           0.554           0.339
-9                        0.793           0.565           0.348
-10                       0.954           0.496           0.371
-11                       0.928           0.424           0.405
-12                       0.924           0.351           0.502
-343                         NA           0.809           0.170
-344                         NA           0.817           0.159
-345                         NA           0.817           0.147
-346                         NA           0.786           0.162
-347                         NA           0.765           0.158
-348                         NA           0.820           0.134
-349                         NA           0.821           0.159
-350                         NA           0.836           0.142
-351                         NA           0.854           0.112
-352                         NA           0.809           0.171
-353                         NA           0.826           0.146
-354                         NA           0.821           0.214
-355                         NA           0.856           0.190
-356                         NA           0.891           0.147
-357                         NA           0.789           0.245
-733                      0.855           0.687           0.199
-734                      0.862           0.668           0.253
-735                      0.891           0.674           0.259
-736                      0.895           0.771           0.301
-737                      0.863           0.697           0.267
-738                      0.908           0.648           0.232
-739                      0.830           0.629           0.295
-740                      0.832           0.680           0.330
-741                      0.832           0.711           0.285
-742                      0.776           0.701           0.322
-743                      0.765           0.695           0.346
-744                      0.781           0.682           0.318
-745                      0.805           0.657           0.357
-746                      0.752           0.648           0.466
-747                      0.780           0.752           0.383
-787                      0.473           0.878           0.209
-788                      0.487           0.875           0.148
-789                      0.580           0.862           0.233
-790                      0.618           0.876           0.201
-791                      0.590           0.865           0.190
-792                      0.573           0.835           0.237
-793                      0.558           0.814           0.245
-794                      0.406           0.784           0.229
-795                      0.409           0.799           0.225
-796                      0.399           0.809           0.211
-797                      0.337           0.833           0.213
-798                      0.362           0.811           0.213
-799                      0.373           0.807           0.223
-800                      0.356           0.797           0.246
-1837                     0.600           0.827           0.261
-1838                     0.633           0.829           0.232
-1839                     0.668           0.872           0.227
-1840                     0.665           0.843           0.262
-1841                     0.690           0.861           0.231
-1842                     0.697           0.836           0.273
-1843                     0.710           0.834           0.260
-1844                     0.747           0.814           0.260
-1845                     0.702           0.834           0.281
-1846                     0.698           0.814           0.275
-1847                     0.739           0.806           0.264
-1848                     0.681           0.827           0.268
-1849                     0.710           0.815           0.292
-1850                     0.707           0.815           0.244
-1851                     0.678           0.787           0.295</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating interactive graph</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'subset_file2' is your dataframe</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Plotly plot</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(subset_file2, <span class="at">x =</span> <span class="sc">~</span>year, <span class="at">y =</span> <span class="sc">~</span>Healthy.life.expectancy.at.birth, </span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="sc">~</span>Country.name, <span class="at">text =</span> <span class="sc">~</span>Country.name) <span class="sc">%&gt;%</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_markers</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Healthy Life Expectancy at Birth Over Years"</span>,</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>),</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Healthy Life Expectancy at Birth"</span>),</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">hovermode =</span> <span class="st">"closest"</span>)</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the interactive plot to an HTML file</span></span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>htmlwidgets<span class="sc">::</span><span class="fu">saveWidget</span>(fig, <span class="st">"fig.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating a subset </span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>selected_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Afghanistan"</span>, <span class="st">"United States"</span>, <span class="st">"China"</span>, <span class="st">"Ireland"</span>, <span class="st">"India"</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a subset where the "Country.name" is in the selected countries list</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>subset_file2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(file2, Country.name <span class="sc">%in%</span> selected_countries)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View the subset</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">#print(subset_file2)</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="co">#creating interactive graph</span></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'subset_file2' is your dataframe</span></span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Plotly plot</span></span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(subset_file2, <span class="at">x =</span> <span class="sc">~</span>year, <span class="at">y =</span> <span class="sc">~</span>Healthy.life.expectancy.at.birth, </span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="sc">~</span>Country.name, <span class="at">text =</span> <span class="sc">~</span>Country.name) <span class="sc">%&gt;%</span></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_markers</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Healthy Life Expectancy at Birth Over Years"</span>,</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>),</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Healthy Life Expectancy at Birth"</span>),</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">hovermode =</span> <span class="st">"closest"</span>)</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the interactive plot to an HTML file</span></span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>htmlwidgets<span class="sc">::</span><span class="fu">saveWidget</span>(fig, <span class="st">"fig.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <iframe src="fig.html" width="100%" height="500" style="border:none;"></iframe>
+</section>
+</section>
+<section id="part-c" class="level1">
+<h1>Part C</h1>
+<div style="text-align: justify;">
+<p>In this section, I will be showing some visualisation, which will give us some valuable insights.</p>
+</div>
+<section id="bar-plot-population-of-top-5-countries" class="level2">
+<h2 class="anchored" data-anchor-id="bar-plot-population-of-top-5-countries">Bar Plot-Population of Top 5 Countries</h2>
+<div style="text-align: justify;">
+<p>Top 5 countries based on population</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset </span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>top_5_populated <span class="ot">&lt;-</span> <span class="fu">head</span>(country_data[<span class="fu">order</span>(<span class="sc">-</span>country_data<span class="sc">$</span>population), ], <span class="dv">5</span>)</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the bar plot</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> top_5_populated, <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> population, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> population), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Population"</span>, <span class="at">title =</span> <span class="st">"Population of Top 5 Countries"</span>) <span class="sc">+</span></span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset </span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>top_5_populated <span class="ot">&lt;-</span> <span class="fu">head</span>(country_data[<span class="fu">order</span>(<span class="sc">-</span>country_data<span class="sc">$</span>population), ], <span class="dv">5</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the bar plot</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> top_5_populated, <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> population, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> population), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Population"</span>, <span class="at">title =</span> <span class="st">"Population of Top 5 Countries"</span>) <span class="sc">+</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="bar-plot-life-expectancy-of-top-5-populated-countries" class="level2">
+<h2 class="anchored" data-anchor-id="bar-plot-life-expectancy-of-top-5-populated-countries">Bar Plot-Life Expectancy of Top 5 populated Countries</h2>
+<div style="text-align: justify;">
+<p>Life expectancy of the top 5 populated countries</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> top_5_populated, <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_expectancy, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> life_expectancy), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Life Expectancy"</span>, <span class="at">title =</span> <span class="st">"Life Expectancy of Top 5 populated Countries"</span>) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> top_5_populated, <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_expectancy, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> life_expectancy), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Life Expectancy"</span>, <span class="at">title =</span> <span class="st">"Life Expectancy of Top 5 populated Countries"</span>) <span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="scattered-plot-fertility-rate-vs.-life-expectancy-for-selected-countries" class="level2">
+<h2 class="anchored" data-anchor-id="scattered-plot-fertility-rate-vs.-life-expectancy-for-selected-countries">Scattered Plot-Fertility Rate vs.&nbsp;Life Expectancy for Selected countries</h2>
+<div style="text-align: justify;">
+<p>Scatter plot dpeciting how 20 most populated countries perform with respect to fertility rate and life expectancy.</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>top_20_populated <span class="ot">&lt;-</span> <span class="fu">head</span>(country_data[<span class="fu">order</span>(<span class="sc">-</span>country_data<span class="sc">$</span>population), ], <span class="dv">20</span>)  </span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_20_populated, <span class="fu">aes</span>(<span class="at">x =</span> fertility_rate, <span class="at">y =</span> life_expectancy, <span class="at">size =</span> population, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> country), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Add country labels</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fertility Rate vs. Life Expectancy for Selected countries"</span>,</span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Fertility Rate"</span>,</span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Life Expectancy"</span>) <span class="sc">+</span></span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>top_20_populated <span class="ot">&lt;-</span> <span class="fu">head</span>(country_data[<span class="fu">order</span>(<span class="sc">-</span>country_data<span class="sc">$</span>population), ], <span class="dv">20</span>)  </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_20_populated, <span class="fu">aes</span>(<span class="at">x =</span> fertility_rate, <span class="at">y =</span> life_expectancy, <span class="at">size =</span> population, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> country), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Add country labels</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fertility Rate vs. Life Expectancy for Selected countries"</span>,</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Fertility Rate"</span>,</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Life Expectancy"</span>) <span class="sc">+</span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="box-plots" class="level2">
+<h2 class="anchored" data-anchor-id="box-plots">Box plots</h2>
+<div style="text-align: justify;">
+<p>Box plot for various paramters to know median value and also spread.</p>
+</div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for life expectancy</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> life_expectancy)) <span class="sc">+</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Life Expectancy"</span>)</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for generosity</span></span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> generosity)) <span class="sc">+</span></span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"pink"</span>) <span class="sc">+</span></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Generosity"</span>)</span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for corruption</span></span>
-<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> corruption)) <span class="sc">+</span></span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"purple"</span>, <span class="at">fill =</span> <span class="st">"lavender"</span>) <span class="sc">+</span></span>
-<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Corruption"</span>)</span>
-<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for fertility rate</span></span>
-<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> fertility_rate)) <span class="sc">+</span></span>
-<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">fill =</span> <span class="st">"peachpuff"</span>) <span class="sc">+</span></span>
-<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Fertility Rate"</span>)</span>
-<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange plots in one image</span></span>
-<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(plot1, plot2, plot3, plot4, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for life expectancy</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> life_expectancy)) <span class="sc">+</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Life Expectancy"</span>)</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for generosity</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> generosity)) <span class="sc">+</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"pink"</span>) <span class="sc">+</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Generosity"</span>)</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for corruption</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> corruption)) <span class="sc">+</span></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"purple"</span>, <span class="at">fill =</span> <span class="st">"lavender"</span>) <span class="sc">+</span></span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Corruption"</span>)</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot for fertility rate</span></span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(country_data, <span class="fu">aes</span>(<span class="at">y =</span> fertility_rate)) <span class="sc">+</span></span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">fill =</span> <span class="st">"peachpuff"</span>) <span class="sc">+</span></span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of Fertility Rate"</span>)</span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange plots in one image</span></span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(plot1, plot2, plot3, plot4, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="23105421_quarto_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
@@ -1073,17 +916,53 @@ GCV = 0.030496  Scale est. = 0.028842  n = 78</code></pre>
 </div>
 </section>
 </section>
-<section id="references" class="level1">
-<h1>References</h1>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<pre class="bibliography cell-code"><code></code></pre>
-</details>
-</div>
+<section id="part-d-notes" class="level1">
+<h1>Part D-Notes</h1>
+<ul>
+<li><div style="text-align: justify;">
+<ul>
+<li><p>Due to limitation with respect to data-set,qualitative analysis couldn’t be performed.</p></li>
+<li><p>One of the major limitation of this data-set is it has only 89 columns after joining, hence the model may not be accurate.</p></li>
+<li><p>BE1-executing R code in Quarto, BE5-explanatory - has been done throughout the assignment</p></li>
+<li><p>The all BE tasks has been performed</p></li>
+<li><p>SE2- Use of private Github repository - This has been created recently and has been shared with the Professor.</p></li>
+<li><p>Thus SE1,SE2,SE3,SE4 has been completed.</p></li>
+<li><p>The video and reference document has been uploaded on canvas</p></li>
+<li><p><span class="citation" data-cites="stackoverflow_convert-data-frame-column-format">Overflow (<a href="#ref-stackoverflow_convert-data-frame-column-format" role="doc-biblioref">2012</a>)</span> was used to do basic changes to quarto documents</p></li>
+<li><p><span class="citation" data-cites="youtubevideo">Author(s) or Channel Name (<a href="#ref-youtubevideo" role="doc-biblioref">Year Published</a>)</span> was used to add bibliography to this document</p></li>
+</ul>
+</div></li>
+<li><div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="thank%20you.png" title="Thank you" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Thank you!</figcaption>
+</figure>
+</div></div></li>
+</ul>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-youtubevideo" class="csl-entry" role="listitem">
+Author(s) or Channel Name. Year Published. <span>“Title of the Video.”</span> <a href="https://www.youtube.com/watch?v=dbljY7jxrSA">https://www.youtube.com/watch?v=dbljY7jxrSA</a>.
+</div>
+<div id="ref-openai_chatgpt" class="csl-entry" role="listitem">
+OpenAI. 2024. <span>“OpenAI ChatGPT.”</span> Online. <a href="https://chat.openai.com/">https://chat.openai.com/</a>.
+</div>
+<div id="ref-stackoverflow_convert-data-frame-column-format" class="csl-entry" role="listitem">
+Overflow, Stack. 2012. <span>“Convert Data Frame Column Format from Character to Factor.”</span> <a href="https://stackoverflow.com/questions/9251326/convert-data-frame-column-format-from-character-to-factor" class="uri">https://stackoverflow.com/questions/9251326/convert-data-frame-column-format-from-character-to-factor</a>.
+</div>
+<div id="ref-RGraphGallery" class="csl-entry" role="listitem">
+R Graph Gallery. Accessed 2024. <span>“Interactive Charts in r.”</span> <a href="https://r-graph-gallery.com/interactive-charts.html" class="uri">https://r-graph-gallery.com/interactive-charts.html</a>.
+</div>
+<div id="ref-joshuaswords_awesome-eda-2021-happiness-population" class="csl-entry" role="listitem">
+Words, Joshua’s. 2021. <span>“Awesome EDA 2021: Happiness &amp; Population.”</span> Kaggle notebook. <a href="https://www.kaggle.com/code/joshuaswords/awesome-eda-2021-happiness-population/notebook">https://www.kaggle.com/code/joshuaswords/awesome-eda-2021-happiness-population/notebook</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

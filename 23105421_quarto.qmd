@@ -1,80 +1,107 @@
 ---
-title: "MS130_3rd_Assignment_23105421"
+title: "MS5130_3rd_Assignment_23105421"
 Author: "Anup Radhakrishna Kamath"
 format:
   html:
     toc: true
     #html-math-method: katex
-    css: styles.css
 editor: visual
 code-fold: true
 warning: false
-
+bibliography: "References.bib"
 ---
+
 ![Author: Anup Kamath](logo.png "University of Galway")
+
+# Introduction
+
+::: {style="text-align: justify;"}
+Greetings, this document has been crafted to satisfy the criteria of the MS5130 course, Applied Analytics in Business and Society. It encompasses a range of analyses including quantitative analysis, visualization utilizing the leaflet package, interactive graphs, and fundamental visualizations.
+:::
 
 # Part A
 
+::: {style="text-align: justify;"}
+In Part I, I will showcase some of the basic enhancements (BEs) I have implemented. These enhancements primarily involve utilizing Markdown, Quarto, dataset reading, preprocessing, merging, and conducting quantitative analysis
+:::
 
+## Importing files
 
-## Reading files
-
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+::: {style="text-align: justify;"}
+The initial steps involve establishing the directory and importing necessary files. The data-sets essential for the analysis were sourced from @joshuaswords_awesome-eda-2021-happiness-population . The data-set contains information on various parameters such as life expectancy, fertility rate, corruption, etc., pertaining to different countries.This will full-fill our BE2- Use multiple data-sets task.
+:::
 
 ```{r}
+print("the current directory is")
 getwd()
-setwd("C:/Users/ANUP KAMATH/Desktop")
+print("Lets set the directory as per our requirement")
+setwd("C:/Users/ANUP KAMATH/Documents/GitHub/R-Assignment")
+print("The new directory is")
 getwd()
+#importing 1st file
 file1<-read.csv(file="C:/Users/ANUP KAMATH/Desktop/children-born-per-woman.csv")
+print("The first few rows of 1st file are")
 head(file1)
+#importing 2nd file
 file2<-read.csv(file="C:/Users/ANUP KAMATH/Desktop/world-happiness-report.csv")
+print("The first few rows of 2nd file are")
 head(file2)
+#importing 3rd file
 file3<-read.csv(file="C:/Users/ANUP KAMATH/Desktop/population_by_country_2020.csv")
+print("The first few rows of 3rd file are")
 head(file3)
 
 ```
 
-
 ## Preprosseing dataset
-You can add options to executable code like this
+
+::: {style="text-align: justify;"}
+Now, let's preprocess the data to facilitate easy joining. We have selected only the columns necessary for our analysis, and the rest have been dropped. We have only retained data with respect to year 2020. The names of the columns has been changed.
+:::
 
 ```{r}
 #file 1 changes
 subset_a_2020 <- file1[file1$Year == 2020, ]
-head(subset_a_2020)
+#head(subset_a_2020)
 
 subset_a_2020 <- subset_a_2020[, c("Entity", "Code", 
                                    "Fertility.rate..Gapminder..v12..2017.")]
 names(subset_a_2020) <- c("country", "code", "fertility_rate")
+print("The new modified file 1 data-setlooks like this")
 head(subset_a_2020)
 
 #file 2 changes
 subset_b_2020 <- file2[file2$year == 2020, ]
 
 # View the subset
-head(subset_b_2020)
+#head(subset_b_2020)
 subset_b_2020 <- subset_b_2020[, c("Country.name", "Healthy.life.expectancy.at.birth", 
                                    "Freedom.to.make.life.choices", "Generosity", 
                                    "Perceptions.of.corruption")]
 names(subset_b_2020) <- c("country", "life_expectancy", "freedom","generosity","corruption")
 
 # View the modified subset
+print("The modified file 2 data-setlooks like this")
 head(subset_b_2020)
 
 #file 3 changes
-head(file3)
-colnames(file3)
+#head(file3)
+#colnames(file3)
 subset_c_2020 <- file3[, c("Country..or.dependency.", "Population..2020.", 
                            "Density..P.Km..")]
 
 names(subset_c_2020)<- c("country", "population", "density_pkm")
+print("The modified file 3 data-setlooks like this")
 head(subset_c_2020)
 ```
 
-
 ## Joining Datasets
-The `echo: false` option disables the printing of code (only output is displayed).
+
+::: {style="text-align: justify;"}
+It's time to join the 3 data-sets into 1. I have used dplyr libraries inner join to join them. As R is case sensitive I had to change all country names to lower caps to succed in this task.This will full-fill our BE3- Combine data-sets together task.
+:::
+
+.
 
 ```{r}
 
@@ -93,11 +120,21 @@ country_data <- subset_b_2020 %>%
   inner_join(subset_c_2020, by = "country")
 
 #show new dataset
+print("The new data-set looks like this")
 head(country_data)
 ```
 
 ## Quantitative Analysis
-###GLM model
+
+::: {style="text-align: justify;"}
+Due to the inadequacy of my dataset in producing satisfactory models, I opted to convert my target variable, corruption, into a factor @stackoverflow_convert-data-frame-column-format . With this new column, I proceeded to run GLM and GAM models. As my datasets do not allow for qualitative models like text mining, I focused on satisfying the deliverable (BE4) by incorporating a synergy of quantitative and qualitative analyses through GLM and GAM models.
+:::
+
+### GLM model
+
+::: {style="text-align: justify;"}
+A Generalized Linear Model (GLM) is a statistical framework that allows for the analysis of data with diverse response distributions.Here I have used the corruption_factor as a tagert variable and freedom column as the independent variable.
+:::
 
 ```{r}
 
@@ -111,8 +148,6 @@ country_data <- country_data %>%
 
 # Convert 'corruption_factor' to a factor variable
 country_data$corruption_factor <- factor(country_data$corruption_factor)
-
-head(country_data)
 
 # running glm model
 set.seed(100)
@@ -132,8 +167,15 @@ summary(glm_model)
 plot(glm_model)
 ```
 
-## Quantitative Analysis
-###GAM model
+::: {style="text-align: justify;"}
+The Fisher Scoring algorithm converged in 4 iterations. The obtained p-value of 0.176 suggests insignificance, indicating no significant relationship between corruption and freedom. The null deviance (18.550) and residual deviance (16.593) represent the deviation of the fitted model, with lower values indicating better model fit.
+:::
+
+### GAM model
+
+::: {style="text-align: justify;"}
+A Generalized Additive Model (GAM) is a flexible extension of the Generalized Linear Model (GLM) that incorporates non-linear relationships between predictors and the response variable. The GAM model was built with corruption as the target variable, freedom and generosity were the independent variable.
+:::
 
 ```{r}
 
@@ -151,14 +193,26 @@ plot(gam_model)
 
 ```
 
+::: {style="text-align: justify;"}
+The adjusted R-squared is 0.31, indicating that 31% of the variation in corruption is explained by the model. The deviance explained is 33.9%. The smooth term for freedom has an effective degrees of freedom (edf) of 2.23 and a highly significant F-statistic (p \< 2.96e-06), suggesting a non-linear relationship with corruption. However, the smooth term for generosity is not significant (p = 0.877), implying a linear relationship.
+:::
+
 # Part B
 
+::: {style="text-align: justify;"}
+In this sections I will be performing tasks for superior enhancements (SEs)
+:::
+
 ## Mermaid design
+
+::: {style="text-align: justify;"}
+The mermaid tool is used to describe the flow of data and also varibles used to do varies analysis and visualization.This task will fulfill the (SE1) Depict your data streams using Mermaid.
+:::
 
 ```{mermaid}
 
 graph LR
-    A[children-born-per-woman]-- import data --> D[subset_a_2020]
+     A[children-born-per-woman]-- import data --> D[subset_a_2020]
     B[world-happiness-report]-- import data --> E[subset_b_2020]
     C[population_by_country_2020]-- import data  --> F[subset_c_2020]
     D[subset_a_2020]-- Preprocess data --> M((country_data))
@@ -170,12 +224,25 @@ graph LR
     M((country_data))-- GAM model-->I[GAM Model]
    I[GAM Model]-- variables-->J[corruption,generosity & Freedom]
 
+    M((country_data))-- leaflet-->K[ Geographic map]--variables-->WY[Population,Corruption]
+    B[world-happiness-report]-- interactive graph --> L[ Scattered plot]
+    M((country_data))-->N[Bar plot]--variables-->W[Population]
+    M((country_data))-->Y[Bar plot]--variables-->S[Life expectancy]
+    M((country_data))-->O[Scattere Plot]--variables-->X[Fertility Rate vs. Life Expectancy]
+    M((country_data))-->U[Box Plot]--variables-->R[corruption,generosity,fertility rate,life expectancy]
 ```
 
-
-
 ## Leaflet Analysis
-###Adding Latitude and Longitude
+
+::: {style="text-align: justify;"}
+Using Leaflet library we can map various parameters on the world/area maps.This task will fulfill the (SE3) Use of geographical data analysis using Leaflet.
+:::
+
+### Adding Latitude and Longitude
+
+::: {style="text-align: justify;"}
+While doing the analysis I was not able to map parameters on the world map as latitudes and logitude werentpresent in my dataset. I used Generative AI to add these columns to my dataset @openai_chatgpt
+:::
 
 ```{r}
 
@@ -208,7 +275,7 @@ library(countrycode)
 library(plotly)
 
 
-head(country_data)
+#head(country_data)
 library(maps)
 library(ggplot2)
 
@@ -241,10 +308,14 @@ country_data$lon <- ifelse(country_data$country == "united states", -95.7129, co
 country_data$lat <- ifelse(country_data$country == "united kingdom", 55.3781, country_data$lat)
 country_data$lon <- ifelse(country_data$country == "united kingdom", -3.4360, country_data$lon)
 
-tail(country_data)
+#tail(country_data)
 ```
 
-### Geographical Analysis 
+### Geographical Analysis
+
+::: {style="text-align: justify;"}
+The Map visualisation using Leaflet library
+:::
 
 ```{r}
 
@@ -268,11 +339,14 @@ world_map_leaflet <- world_map_leaflet %>%
 world_map_leaflet
 ```
 
-## Interactive plot 
+## Interactive plot
+
+::: {style="text-align: justify;"}
+Interactive plot allows you move around in the final output file, like pop-up zoom in zoom out etc. This will full-fill the SE4- Use of interactive charts/graphs/plots task @RGraphGallery
+:::
 
 ```{r}
 
-# https://r-graph-gallery.com/interactive-charts.html
 #creating a subset 
 selected_countries <- c("Afghanistan", "United States", "China", "Ireland", "India")
 
@@ -280,7 +354,7 @@ selected_countries <- c("Afghanistan", "United States", "China", "Ireland", "Ind
 subset_file2 <- subset(file2, Country.name %in% selected_countries)
 
 # View the subset
-print(subset_file2)
+#print(subset_file2)
 
 
 #creating interactive graph
@@ -303,12 +377,20 @@ fig <- plot_ly(subset_file2, x = ~year, y = ~Healthy.life.expectancy.at.birth,
 htmlwidgets::saveWidget(fig, "fig.html")
 ```
 
-
-
-
 ```{=html}
 <iframe src="fig.html" width="100%" height="500" style="border:none;"></iframe>
 ```
+# Part C
+
+::: {style="text-align: justify;"}
+In this section, I will be showing some visualisation, which will give us some valuable insights.
+:::
+
+## Bar Plot-Population of Top 5 Countries
+
+::: {style="text-align: justify;"}
+Top 5 countries based on population
+:::
 
 ```{r}
 library(ggplot2)
@@ -327,6 +409,11 @@ ggplot(data = top_5_populated, aes(x = country, y = population, fill = country))
 
 ```
 
+## Bar Plot-Life Expectancy of Top 5 populated Countries
+
+::: {style="text-align: justify;"}
+Life expectancy of the top 5 populated countries
+:::
 
 ```{r}
 ggplot(data = top_5_populated, aes(x = country, y = life_expectancy, fill = country)) +
@@ -336,6 +423,12 @@ ggplot(data = top_5_populated, aes(x = country, y = life_expectancy, fill = coun
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
 ```
+
+## Scattered Plot-Fertility Rate vs. Life Expectancy for Selected countries
+
+::: {style="text-align: justify;"}
+Scatter plot dpeciting how 20 most populated countries perform with respect to fertility rate and life expectancy.
+:::
 
 ```{r}
 library(ggplot2)
@@ -352,6 +445,12 @@ ggplot(top_20_populated, aes(x = fertility_rate, y = life_expectancy, size = pop
   theme_minimal()
 
 ```
+
+## Box plots
+
+::: {style="text-align: justify;"}
+Box plot for various paramters to know median value and also spread.
+:::
 
 ```{r}
 library(ggplot2)
@@ -384,11 +483,30 @@ plot_grid(plot1, plot2, plot3, plot4, ncol = 2)
 
 ```
 
+# Part D-Notes
+
+-   ::: {style="text-align: justify;"}
+    -   Due to limitation with respect to data-set,qualitative analysis couldn't be performed.
+
+    -   One of the major limitation of this data-set is it has only 89 columns after joining, hence the model may not be accurate.
+
+    -   BE1-executing R code in Quarto, BE5-explanatory - has been done throughout the assignment
+
+    -   The all BE tasks has been performed
+
+    -   SE2- Use of private Github repository - This has been created recently and has been shared with the Professor.
+
+    -   Thus SE1,SE2,SE3,SE4 has been completed.
+
+    -   The video and reference document has been uploaded on canvas
+
+    -   @stackoverflow_convert-data-frame-column-format was used to do basic changes to quarto documents
+
+    -   @youtubevideo was used to add bibliography to this document
+    :::
+
+-   <div>
+![Thank you!](thank you.png "Thank you")
+
 
 # References
-
-```{bibliography}
-
-
-```
-
