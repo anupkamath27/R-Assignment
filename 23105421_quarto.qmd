@@ -1,3 +1,27 @@
+---
+title: "MS130_3rd_Assignment_23105421"
+Author: "Anup Radhakrishna Kamath"
+format:
+  html:
+    toc: true
+    #html-math-method: katex
+    css: styles.css
+editor: visual
+code-fold: true
+
+---
+![Author: Anup Kamath](logo.png "University of Galway")
+
+# Part A
+
+
+
+## Reading files
+
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
 getwd()
 setwd("C:/Users/ANUP KAMATH/Desktop")
 getwd()
@@ -7,6 +31,22 @@ file2<-read.csv(file="C:/Users/ANUP KAMATH/Desktop/world-happiness-report.csv")
 head(file2)
 file3<-read.csv(file="C:/Users/ANUP KAMATH/Desktop/population_by_country_2020.csv")
 head(file3)
+
+```
+
+
+## Preprosseing dataset
+You can add options to executable code like this
+
+```{r}
+#file 1 changes
+subset_a_2020 <- file1[file1$Year == 2020, ]
+head(subset_a_2020)
+
+subset_a_2020 <- subset_a_2020[, c("Entity", "Code", 
+                                   "Fertility.rate..Gapminder..v12..2017.")]
+names(subset_a_2020) <- c("country", "code", "fertility_rate")
+head(subset_a_2020)
 
 #file 2 changes
 subset_b_2020 <- file2[file2$year == 2020, ]
@@ -21,16 +61,6 @@ names(subset_b_2020) <- c("country", "life_expectancy", "freedom","generosity","
 # View the modified subset
 head(subset_b_2020)
 
-#file 1 changes
-subset_a_2020 <- file1[file1$Year == 2020, ]
-head(subset_a_2020)
-
-subset_a_2020 <- subset_a_2020[, c("Entity", "Code", 
-                                   "Fertility.rate..Gapminder..v12..2017.")]
-names(subset_a_2020) <- c("country", "code", "fertility_rate")
-head(subset_a_2020)
-
-
 #file 3 changes
 head(file3)
 colnames(file3)
@@ -39,11 +69,16 @@ subset_c_2020 <- file3[, c("Country..or.dependency.", "Population..2020.",
 
 names(subset_c_2020)<- c("country", "population", "density_pkm")
 head(subset_c_2020)
+```
+
+
+## Joining Datasets
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
 
 #joining tables
 library(dplyr)
-
-
 
 # Convert country column to lowercase in all dataframes
 subset_a_2020 <- subset_a_2020 %>% mutate(country = tolower(country))
@@ -58,8 +93,13 @@ country_data <- subset_b_2020 %>%
 
 #show new dataset
 head(country_data)
+```
 
-#--------------------#glm model ------------------
+## Quantitative Analysis
+###GLM model
+
+```{r}
+
 #quantitative analysis- glm model
 library(dplyr)
 
@@ -89,8 +129,12 @@ summary(glm_model)
 
 # Plot the model
 plot(glm_model)
+```
 
-#----------------------------- #gam model------------------------
+## Quantitative Analysis
+###GAM model
+
+```{r}
 
 #gam model
 #install.packages("gam")
@@ -104,14 +148,40 @@ summary(gam_model)
 
 plot(gam_model)
 
+```
 
-#---------------------#adding latitude and longitude--------------
+# Part B
 
-#instakk required packages
+## Mermaid design
+
+```{mermaid}
+
+graph LR
+    A[children-born-per-woman]-- import data --> D[subset_a_2020]
+    B[world-happiness-report]-- import data --> E[subset_b_2020]
+    C[population_by_country_2020]-- import data  --> F[subset_c_2020]
+    D[subset_a_2020]-- Preprocess data --> M((country_data))
+    E[subset_b_2020]-- Preprocess data  --> M((country_data))
+    F[subset_c_2020]-- Preprocess data --> M((country_data))
+    
+   M((country_data))-- GLM model-->G[GLM Model]
+   G[GLM Model]-- variables-->H[corruption & Freedom]
+    M((country_data))-- GAM model-->I[GAM Model]
+   I[GAM Model]-- variables-->J[corruption,generosity & Freedom]
+
+```
+
+
+
+## Leaflet Analysis
+###Adding Latitude and Longitude
+
+```{r}
+
+#install required packages
 #install.packages("readr")
 #install.packages("dplyr")
 #install.packages("tidyverse")
-
 library(readr)
 library(dplyr)
 library(tidyverse)
@@ -171,37 +241,11 @@ country_data$lat <- ifelse(country_data$country == "united kingdom", 55.3781, co
 country_data$lon <- ifelse(country_data$country == "united kingdom", -3.4360, country_data$lon)
 
 tail(country_data)
-#---------------------------interactive design---------------------
+```
 
-# https://r-graph-gallery.com/interactive-charts.html
-#creating a subset 
-selected_countries <- c("Afghanistan", "United States", "China", "Ireland", "India")
+### Geographical Analysis 
 
-# Create a subset where the "Country.name" is in the selected countries list
-subset_file2 <- subset(file2, Country.name %in% selected_countries)
-
-# View the subset
-print(subset_file2)
-
-
-#creating interactive graph
-library(plotly)
-library(dplyr)
-
-# Assuming 'subset_file2' is your dataframe
-
-# Create Plotly plot
-fig <- plot_ly(subset_file2, x = ~year, y = ~Healthy.life.expectancy.at.birth, 
-               color = ~Country.name, text = ~Country.name) %>%
-  add_markers() %>%
-  layout(title = "Healthy Life Expectancy at Birth Over Years",
-         xaxis = list(title = "Year"),
-         yaxis = list(title = "Healthy Life Expectancy at Birth"),
-         hovermode = "closest")
-
-# Print the plot
-print(fig)
-#-----------------------#leaflet analysis---------------------
+```{r}
 
 library(leaflet)
 
@@ -221,8 +265,51 @@ world_map_leaflet <- world_map_leaflet %>%
 
 # Display the map
 world_map_leaflet
-#---------------------some analysis--------------------------------------
-#Bar chart
+```
+
+## Interactive plot 
+
+```{r}
+
+# https://r-graph-gallery.com/interactive-charts.html
+#creating a subset 
+selected_countries <- c("Afghanistan", "United States", "China", "Ireland", "India")
+
+# Create a subset where the "Country.name" is in the selected countries list
+subset_file2 <- subset(file2, Country.name %in% selected_countries)
+
+# View the subset
+print(subset_file2)
+
+
+#creating interactive graph
+library(plotly)
+library(dplyr)
+library(ggplot2)
+# Assuming 'subset_file2' is your dataframe
+
+# Create Plotly plot
+fig <- plot_ly(subset_file2, x = ~year, y = ~Healthy.life.expectancy.at.birth, 
+               color = ~Country.name, text = ~Country.name) %>%
+  add_markers() %>%
+  layout(title = "Healthy Life Expectancy at Birth Over Years",
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Healthy Life Expectancy at Birth"),
+         hovermode = "closest")
+
+
+# Save the interactive plot to an HTML file
+htmlwidgets::saveWidget(fig, "fig.html")
+```
+
+
+
+
+```{=html}
+<iframe src="fig.html" width="100%" height="500" style="border:none;"></iframe>
+```
+
+```{r}
 library(ggplot2)
 
 # Subset 
@@ -233,15 +320,25 @@ ggplot(data = top_5_populated, aes(x = country, y = population, fill = country))
   geom_bar(stat = "identity") +
   geom_text(aes(label = population), vjust = -0.5, size = 3) +  
   labs(x = "Country", y = "Population", title = "Population of Top 5 Countries") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
-#--------------------------------------------------------------------
-#Bar chart 2
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+
+
+```
+
+
+```{r}
 ggplot(data = top_5_populated, aes(x = country, y = life_expectancy, fill = country)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = life_expectancy), vjust = -0.5, size = 3) +  
   labs(x = "Country", y = "Life Expectancy", title = "Life Expectancy of Top 5 populated Countries") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
-#------------------------------------------------------------
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+```
+# References
+
+```{bibliography}
 
 
+```
 
