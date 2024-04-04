@@ -168,7 +168,7 @@ plot(glm_model)
 ```
 
 ::: {style="text-align: justify;"}
-The Fisher Scoring algorithm converged in 4 iterations. The obtained p-value of 0.176 suggests insignificance, indicating no significant relationship between corruption and freedom. The null deviance (18.550) and residual deviance (16.593) represent the deviation of the fitted model, with lower values indicating better model fit.
+The Fisher Scoring algorithm converged in 4 iterations. The obtained **p-value of 0.176 suggests insignificance**, indicating no significant relationship between corruption and freedom. The null deviance (18.550) and residual deviance (16.593) represent the deviation of the fitted model, with lower values indicating better model fit.
 :::
 
 ### GAM model
@@ -194,7 +194,7 @@ plot(gam_model)
 ```
 
 ::: {style="text-align: justify;"}
-The adjusted R-squared is 0.31, indicating that 31% of the variation in corruption is explained by the model. The deviance explained is 33.9%. The smooth term for freedom has an effective degrees of freedom (edf) of 2.23 and a highly significant F-statistic (p \< 2.96e-06), suggesting a non-linear relationship with corruption. However, the smooth term for generosity is not significant (p = 0.877), implying a linear relationship.
+The adjusted R-squared is 0.31, indicating that 31% of the variation in corruption is explained by the model. The deviance explained is 33.9%. The smooth term for freedom has an effective degrees of freedom (edf) of 2.23 and a highly significant F-statistic (p \< 2.96e-06), suggesting a **non-linear relationship with corruption**. However, the smooth term for **generosity is not significant (p = 0.877), implying a linear relationship**.
 :::
 
 # Part B
@@ -506,7 +506,7 @@ plot_grid(plot1, plot2, plot3, plot4, ncol = 2)
     :::
 
 -   <div>
-![Thank you!](thank you.png "Thank you")
 
+    ![Thank you!](thank%20you.png "Thank you")
 
 # References
