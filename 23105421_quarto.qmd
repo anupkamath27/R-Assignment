@@ -4,11 +4,15 @@ Author: "Anup Radhakrishna Kamath"
 format:
   html:
     toc: true
+    toc-expand: 2
+    toc-title: Contents
+    toc-depth: 3
     #html-math-method: katex
 editor: visual
 code-fold: true
 warning: false
 bibliography: "References.bib"
+embed-resources: true
 ---
 
 ![Author: Anup Kamath](logo.png "University of Galway")
