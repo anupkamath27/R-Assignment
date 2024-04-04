@@ -243,5 +243,22 @@ ggplot(data = top_5_populated, aes(x = country, y = life_expectancy, fill = coun
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  
 #------------------------------------------------------------
 
+# Scatter plot
+
+library(ggplot2)
+
+top_20_populated <- head(country_data[order(-country_data$population), ], 20)  
+
+ggplot(top_20_populated, aes(x = fertility_rate, y = life_expectancy, size = population, color = country)) +
+  geom_point(alpha = 0.7) +
+  geom_text(aes(label = country), vjust = -0.5, hjust = 0.5, size = 3) +  # Add country labels
+  scale_size_continuous(range = c(1, 10)) +
+  labs(title = "Fertility Rate vs. Life Expectancy for Selected countries",
+       x = "Fertility Rate",
+       y = "Life Expectancy") +
+  theme_minimal()
+
+#----------------------------------------------------------------
+colnames(country_data)
 
 
