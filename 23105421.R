@@ -259,6 +259,31 @@ ggplot(top_20_populated, aes(x = fertility_rate, y = life_expectancy, size = pop
   theme_minimal()
 
 #----------------------------------------------------------------
-colnames(country_data)
+#box plots
+library(ggplot2)
+library(cowplot)
+
+# Box plot for life expectancy
+plot1 <- ggplot(country_data, aes(y = life_expectancy)) +
+  geom_boxplot(color = "blue", fill = "lightblue") +
+  labs(title = "Box Plot of Life Expectancy")
 
 
+# Box plot for generosity
+plot2 <- ggplot(country_data, aes(y = generosity)) +
+  geom_boxplot(color = "red", fill = "pink") +
+  labs(title = "Box Plot of Generosity")
+
+# Box plot for corruption
+plot3 <- ggplot(country_data, aes(y = corruption)) +
+  geom_boxplot(color = "purple", fill = "lavender") +
+  labs(title = "Box Plot of Corruption")
+
+# Box plot for fertility rate
+plot4 <- ggplot(country_data, aes(y = fertility_rate)) +
+  geom_boxplot(color = "orange", fill = "peachpuff") +
+  labs(title = "Box Plot of Fertility Rate")
+
+# Arrange plots in one image
+plot_grid(plot1, plot2, plot3, plot4, ncol = 2)
+#-------------------------------------------------------------
